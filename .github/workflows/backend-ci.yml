@@ -15,6 +15,8 @@ jobs:
   build-and-test:
     name: Build & Test (${{ matrix.service }})
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -35,25 +37,37 @@ jobs:
         working-directory: backend
         run: mvn -B -pl ${{ matrix.service }} -am verify
 
-      - name: Print failure diagnostics to job summary
+      - name: Capture failure diagnostics to a branch
         if: failure()
         working-directory: backend
         run: |
-          echo "## Failure diagnostics for ${{ matrix.service }}" >> "$GITHUB_STEP_SUMMARY"
-          echo '### Surefire report summaries (.txt)' >> "$GITHUB_STEP_SUMMARY"
+          mkdir -p /tmp/ci-diagnostics
+          OUT=/tmp/ci-diagnostics/${{ matrix.service }}-failure.txt
+          echo "=== mvn -pl ${{ matrix.service }} -am verify (re-run for full output) ===" > "$OUT"
+          mvn -B -pl ${{ matrix.service }} -am verify >> "$OUT" 2>&1 || true
+          echo "" >> "$OUT"
+          echo "=== Surefire .txt reports ===" >> "$OUT"
           for f in ${{ matrix.service }}/target/surefire-reports/*.txt; do
             if [ -f "$f" ]; then
-              echo "<details><summary>$f</summary>" >> "$GITHUB_STEP_SUMMARY"
-              echo '```' >> "$GITHUB_STEP_SUMMARY"
-              cat "$f" >> "$GITHUB_STEP_SUMMARY"
-              echo '```' >> "$GITHUB_STEP_SUMMARY"
-              echo "</details>" >> "$GITHUB_STEP_SUMMARY"
+              echo "--- $f ---" >> "$OUT"
+              cat "$f" >> "$OUT"
             fi
           done
-          echo '### Re-running mvn to capture compiler/build output directly' >> "$GITHUB_STEP_SUMMARY"
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
-          mvn -B -pl ${{ matrix.service }} -am verify >> "$GITHUB_STEP_SUMMARY" 2>&1 || true
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+          git config --global user.email "ci@agritwin.local"
+          git config --global user.name "AGRI-TWIN CI"
+          git fetch origin ci-diagnostics 2>/dev/null || true
+          if git show-ref --verify --quiet refs/remotes/origin/ci-diagnostics; then
+            git checkout -B ci-diagnostics origin/ci-diagnostics
+          else
+            git checkout --orphan ci-diagnostics
+            git rm -rf . > /dev/null 2>&1 || true
+          fi
+          mkdir -p ci-diagnostics
+          cp "$OUT" "ci-diagnostics/${{ matrix.service }}-failure.txt"
+          git add "ci-diagnostics/${{ matrix.service }}-failure.txt"
+          git commit -m "ci: ${{ matrix.service }} failure diagnostics for run ${{ github.run_id }}" || true
+          git push origin ci-diagnostics --force
 
       - name: Upload test results
         if: always()
