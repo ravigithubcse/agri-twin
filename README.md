@@ -221,3 +221,28 @@ cd frontend && npm test
 [![View Repo](https://img.shields.io/badge/View%20Repo-1565C0?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ravigithubcse/agri-twin)
 
 </div>
+
+---
+
+## 👤 Author
+
+<div align="center">
+
+| | |
+|---|---|
+| **Name** | Ravikumar (Ravi) |
+| **Company** | Ravi Future Labs |
+| **Location** | Bengaluru, India 🇮🇳 |
+| **Email** | [rn5127610@gmail.com](mailto:rn5127610@gmail.com) |
+| **Phone** | [9686906521](tel:+919686906521) |
+| **LinkedIn** | [linkedin.com/in/ravikumar2002](https://www.linkedin.com/in/ravikumar2002/) |
+| **GitHub** | [github.com/ravigithubcse](https://github.com/ravigithubcse) |
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ravikumar2002/)
+[![GitHub](https://img.shields.io/badge/GitHub-1565C0?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ravigithubcse/agri-twin)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rn5127610@gmail.com)
+[![View Repo](https://img.shields.io/badge/View%20Repo-1565C0?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ravigithubcse/agri-twin)
+
+*Building India's Farmer Intelligence Platform — Ravi Future Labs*
+
+</div>
