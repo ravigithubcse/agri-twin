@@ -1,0 +1,14 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "farm-twin-service/Dockerfile"
+buildContext = "."
+
+[deploy]
+startCommand = "java -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -jar app.jar"
+healthcheckPath = "/actuator/health"
+healthcheckTimeout = 60
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[[services]]
+internalPort = 8082
