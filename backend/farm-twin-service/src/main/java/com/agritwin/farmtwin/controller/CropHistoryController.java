@@ -30,21 +30,21 @@ public class CropHistoryController {
     @PostMapping
     @Operation(summary = "Log a crop history record against a land parcel")
     public ResponseEntity<CropHistoryResponse> create(
-            @PathVariable UUID parcelId, @Valid @RequestBody CropHistoryRequest request) {
+            @PathVariable("parcelId") UUID parcelId, @Valid @RequestBody CropHistoryRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 cropHistoryService.create(currentUser.id(), parcelId, request));
     }
 
     @GetMapping
     @Operation(summary = "List crop history records for a land parcel")
-    public ResponseEntity<List<CropHistoryResponse>> list(@PathVariable UUID parcelId) {
+    public ResponseEntity<List<CropHistoryResponse>> list(@PathVariable("parcelId") UUID parcelId) {
         return ResponseEntity.ok(cropHistoryService.listForParcel(currentUser.id(), parcelId));
     }
 
     @GetMapping("/{cropHistoryId}")
     @Operation(summary = "Get a single crop history record")
     public ResponseEntity<CropHistoryResponse> getOne(
-            @PathVariable UUID parcelId, @PathVariable UUID cropHistoryId) {
+            @PathVariable("parcelId") UUID parcelId, @PathVariable("cropHistoryId") UUID cropHistoryId) {
         return ResponseEntity.ok(cropHistoryService.getOneForParcel(currentUser.id(), parcelId, cropHistoryId));
     }
 }

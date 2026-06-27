@@ -42,7 +42,7 @@ public class LandParcelController {
 
     @GetMapping("/{parcelId}")
     @Operation(summary = "Get a single land parcel by ID")
-    public ResponseEntity<LandParcelResponse> getOne(@PathVariable UUID parcelId) {
+    public ResponseEntity<LandParcelResponse> getOne(@PathVariable("parcelId") UUID parcelId) {
         return ResponseEntity.ok(landParcelService.getOneForCaller(currentUser.id(), parcelId));
     }
 }
