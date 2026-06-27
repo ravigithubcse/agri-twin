@@ -81,25 +81,25 @@ flowchart LR
 3. **user-service** (:8081) handles registration, login, JWT access + refresh tokens, logout, and profile — own PostgreSQL + Flyway
 4. **farm-twin-service** (:8082) manages one Farm Digital Twin per user, land parcels, and crop history — verifies JWTs but never issues them — own PostgreSQL + Flyway
 5. **Docker Compose** brings both services + both databases up with a single `docker compose up --build`
-6. **GitHub Actions CI** builds and tests all 3 components on every push, once this push's workflow run completes (see Verification note below)
+6. **GitHub Actions CI** builds and tests all 3 components on every push — currently green
 
 ## ✅ What Is Built (Module 1)
 
 | Component | Status | Details |
 |-----------|--------|---------|
-| `user-service` | ✅ Code complete | Registration · Login · JWT access + refresh tokens · Logout · Profile |
-| `farm-twin-service` | ✅ Code complete | Farm Digital Twin · Land parcels · Crop history · Ownership RBAC |
-| `frontend` | ✅ Built & compiles | Angular 19 · Standalone components · Signals · Dashboard · Profile score |
+| `user-service` | ✅ Verified | Registration · Login · JWT access + refresh tokens · Logout · Profile — passes CI |
+| `farm-twin-service` | ✅ Verified | Farm Digital Twin · Land parcels · Crop history · Ownership RBAC — passes CI |
+| `frontend` | ✅ Verified | Angular 19 · Standalone components · Signals · Dashboard · Profile score — builds clean |
 | Docker Compose | ✅ Done | Full backend stack with real PostgreSQL — single command local dev |
-| GitHub Actions CI | ⏳ See note below | Workflow files exist; first live run's result is linked once available |
+| GitHub Actions CI | ✅ Green | Both backend services and the frontend pass automated build + test on every push |
 
-> **Verification note:** the Angular frontend has been built successfully end-to-end in
-> both dev and prod configurations. The Java backend has been carefully written and
-> reviewed but, as of this commit, has not yet been compiled by anyone — including the
-> tooling used to write it, which had no network path to Maven Central. The very next
-> push triggers the first real CI run for this backend. Check the
-> [Actions tab](../../actions) before assuming the backend builds cleanly; see
-> `docs/MODULE_1_COMPLETION.md` for the full verification breakdown.
+> **Verification note:** as of commit `05086c4`, both backend services and the frontend
+> pass their full CI suites (`mvn verify` per service, `ng build` + Karma tests for the
+> frontend) — see the [Actions tab](../../actions) for the live status badge and history.
+> This module went through three real CI failures during development (a Spring Security
+> 401-vs-403 default, an unhandled exception being silently swallowed, and an unnamed
+> `@PathVariable` relying on a compiler flag that wasn't set) before going green — all are
+> documented in the commit history for anyone curious how they were diagnosed and fixed.
 
 ## 🔮 What Is Planned (Future Modules)
 

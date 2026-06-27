@@ -18,3 +18,18 @@ versioning follows [Semantic Versioning](https://semver.org/).
 See `docs/MODULE_1_COMPLETION.md` for the full, explicit list — most notably: shared-secret
 JWT trust model between services (RS256/JWKS deferred), no rate limiting yet on auth
 endpoints, profile completeness is a heuristic rather than a model.
+
+## [0.1.1] — Module 1: First CI run + fixes
+
+The first real GitHub Actions run against this backend (it had never been compiled before
+this point) failed for both services. Fixed in follow-up commits:
+
+### Fixed
+- 401 vs 403 on unauthenticated requests (Spring Security's undecorated default is 403;
+  added an explicit `AuthenticationEntryPoint` in both services)
+- Exceptions were silently swallowed by the generic exception handler with no logging
+- Unnamed `@PathVariable` arguments broke the two nested land-parcel/crop-history
+  endpoints, relying on a compiler flag (`-parameters`) that wasn't set; fixed both by
+  enabling that flag and by naming every `@PathVariable` explicitly
+
+Both backend services and the frontend now pass their full CI suites.

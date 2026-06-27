@@ -53,11 +53,13 @@ Angular web shell, local Docker Compose environment, CI.
 - `frontend`: `AuthService`, `authInterceptor`, `authGuard`, `FarmTwinService` spec files
   (Jasmine/Karma)
 
-## Verification status — please read this carefully
+## Verification status — update: now genuinely verified by CI
 
-I built and reviewed this code carefully, but my ability to **execute** it was limited by
-my sandbox's network policy, and I want to be precise about what that means rather than
-imply more confidence than is warranted:
+The table below was accurate at the time this module was first written, before any CI run
+had ever executed against this backend. It's kept for context on how this was developed,
+but the bottom line as of commit `05086c4` is: **both backend services and the frontend
+pass their full automated test suites in GitHub Actions.** See the
+[Actions tab](../../../actions) for live status.
 
 | Component | What I verified | How |
 |---|---|---|
@@ -65,12 +67,33 @@ imply more confidence than is warranted:
 | Frontend tests | Type-checked successfully | `tsc --noEmit` against the spec files — could not execute them (no headless Chrome reachable in this sandbox; will run for real in GitHub Actions on push) |
 | Backend (Java/Maven) | **Could not compile or run** | My sandbox's network allowlist does not include Maven Central, so `mvn compile`/`mvn test` cannot resolve dependencies here at all. I checked package declarations, brace balance, and DTO/entity field alignment by hand instead. |
 
-**What this means practically:** the backend code has not been executed by anyone yet,
-including me. It is my best work and I checked it as carefully as I could without a
-compiler, but "compiles and passes tests" for the Java side is a claim that will only be
-true once CI runs on push, or once you run `mvn verify` locally. Please treat the backend
-as "ready for its first real compile," not as "tested." I'd recommend running the backend
-test suite locally or watching the GitHub Actions run before building on top of it.
+**What actually happened next:** the first real GitHub Actions run against this backend
+failed — both services. Three real, distinct bugs were found and fixed across several
+follow-up commits, each diagnosed from actual CI failure logs (captured via a
+`ci-diagnostics` branch, since GitHub's standard log/artifact download redirects to Azure
+Blob Storage, which wasn't reachable from the sandbox used to build this):
+
+1. **401 vs 403 on unauthenticated requests** — Spring Security's default behavior for a
+   request with no credentials at all is `403 Forbidden`, which is misleading; REST
+   convention (and this project's own integration tests) correctly expect `401
+   Unauthorized` for "no token was sent." Fixed by adding an explicit
+   `AuthenticationEntryPoint` in both services' `SecurityConfig`.
+2. **Exceptions were being silently swallowed** — the generic `@ExceptionHandler(Exception.class)`
+   in both services returned a 500 with no detail and never logged the underlying
+   exception, which made the *next* bug far harder to diagnose than it should have been.
+   Fixed by logging the full exception with stack trace before responding.
+3. **Unnamed `@PathVariable` arguments** — `@PathVariable UUID parcelId` relied on the
+   compiler preserving parameter names via reflection (the `-parameters` flag), which
+   Maven doesn't enable by default. This silently broke the two *nested* endpoints under
+   `/land-parcels/{parcelId}/...` while the non-nested endpoints worked fine, which is why
+   it wasn't caught by manual code review. Fixed by adding `-parameters` to the compiler
+   plugin and, more robustly, adding explicit `@PathVariable("name")` everywhere.
+
+This is exactly the kind of thing that manual review without a compiler cannot reliably
+catch — which is the whole reason this module's verification status was written so
+explicitly in the first place, rather than just asserting "tested and working."
+
+
 
 ## Known limitations / deliberate scope cuts
 
