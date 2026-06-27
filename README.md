@@ -25,69 +25,60 @@
 ## 🏗️ Architecture
 
 ```mermaid
-flowchart TB
-    subgraph FE["🌐 Frontend — Angular 19"]
-        direction LR
-        F1["📋 Register / Login"]
-        F2["🏠 Dashboard\n(Profile Score)"]
-        F3["🗺️ Land Parcel\nManagement"]
-        F4["📊 Crop History\nRecords"]
-    end
+flowchart LR
+    FE["🌐 Angular 19 SPA
+    Register · Login
+    Dashboard · Land Parcels
+    Crop History"]
 
-    subgraph GW["🔀 API Layer (Docker Compose)"]
-        G1["🔐 user-service  :8081\nJWT Issue · Auth · RBAC"]
-        G2["🌿 farm-twin-service  :8082\nDigital Twin · Parcels · Crops"]
-    end
+    US["🔐 user-service  :8081
+    JWT Issue · Auth
+    RBAC · Profile"]
 
-    subgraph DB["🗄️ Data Layer"]
-        D1["🐘 PostgreSQL\nusers_db\n(Flyway migrations)"]
-        D2["🐘 PostgreSQL\nfarm_twin_db\n(Flyway migrations)"]
-    end
+    FTS["🌿 farm-twin-service  :8082
+    Farm Digital Twin
+    Land Parcels · Crop History"]
 
-    subgraph CI["⚙️ CI — GitHub Actions"]
-        C1["Build + Test\nuser-service"]
-        C2["Build + Test\nfarm-twin-service"]
-        C3["Build + Test\nfrontend"]
-    end
+    PG1["🐘 PostgreSQL
+    users_db
+    Flyway migrations"]
 
-    subgraph ROADMAP["🔮 Planned — Future Modules"]
-        direction LR
-        R1["📡 Kafka\nEvent Streaming"]
-        R2["⚡ Redis\nCaching"]
-        R3["🛰️ Satellite\nImagery AI"]
-        R4["🤖 Yield / Income\nML Prediction"]
-        R5["📱 Flutter\nMobile App"]
-        R6["⛓️ Blockchain\nTraceability"]
-    end
+    PG2["🐘 PostgreSQL
+    farm_twin_db
+    Flyway migrations"]
 
-    FE -->|HTTP / JWT Bearer| GW
-    G1 <-->|Flyway + JPA| D1
-    G2 <-->|Flyway + JPA| D2
-    G2 -->|Verifies JWT issued by| G1
-    CI -.->|every push| GW
+    CI["⚙️ GitHub Actions CI
+    Build + Test
+    all services on push"]
 
-    classDef fe fill:#0d47a1,stroke:#42a5f5,color:#e3f2fd
-    classDef gw fill:#1b5e20,stroke:#66bb6a,color:#e8f5e9
-    classDef db fill:#3e2723,stroke:#ff8a65,color:#fbe9e7
-    classDef ci fill:#1a237e,stroke:#7986cb,color:#e8eaf6
-    classDef road fill:#212121,stroke:#616161,color:#9e9e9e,stroke-dasharray:5 5
-    class F1,F2,F3,F4 fe
-    class G1,G2 gw
-    class D1,D2 db
-    class C1,C2,C3 ci
-    class R1,R2,R3,R4,R5,R6 road
+    FE -->|HTTP + JWT Bearer| US
+    FE -->|HTTP + JWT Bearer| FTS
+    FTS -->|Verifies JWT issued by| US
+    US  <-->|Spring Data JPA + Flyway| PG1
+    FTS <-->|Spring Data JPA + Flyway| PG2
+    CI  -.->|every push| US
+    CI  -.->|every push| FTS
+    CI  -.->|every push| FE
+
+    classDef fe   fill:#0d47a1,stroke:#42a5f5,color:#e3f2fd
+    classDef svc  fill:#1b5e20,stroke:#66bb6a,color:#e8f5e9
+    classDef db   fill:#3e2723,stroke:#ff8a65,color:#fbe9e7
+    classDef ci   fill:#1a237e,stroke:#7986cb,color:#e8eaf6
+    class FE fe
+    class US,FTS svc
+    class PG1,PG2 db
+    class CI ci
 ```
 
-**Request Flow (Module 1 — what is actually built):**
-1. **Angular 19 SPA** (standalone components + Signals + Angular Material) serves register, login, dashboard, and land parcel management
-2. All requests carry a **JWT Bearer token** — issued exclusively by `user-service`, verified by both services
-3. **user-service** (:8081) handles registration, login, JWT access + refresh token lifecycle, logout, and profile lookup — backed by its own PostgreSQL database with Flyway migrations
-4. **farm-twin-service** (:8082) manages one Farm Digital Twin per user, land parcels, and crop history records — enforces ownership on every query, verifies JWTs but never issues them
-5. Both services run together via **Docker Compose** against real PostgreSQL databases with a single `docker compose up --build`
-6. **GitHub Actions CI** builds and runs tests for all three components on every push to any branch
-7. **Future modules** (greyed out) will add Kafka event streaming, Redis caching, satellite imagery AI, ML yield/income prediction, Flutter mobile, and blockchain traceability — sequenced by infrastructure and data availability
+> **Planned future modules** (not yet built): Apache Kafka · Redis · Satellite Imagery AI · ML Yield Prediction · Flutter Mobile · Blockchain Traceability · Aadhaar Integration · Razorpay Billing
 
----
+**Request Flow:**
+1. **Angular 19 SPA** (standalone components + Signals + Angular Material) — register, login, dashboard, land parcel management
+2. Every request carries a **JWT Bearer token** — issued by `user-service`, verified by both services
+3. **user-service** (:8081) handles registration, login, JWT access + refresh tokens, logout, and profile — own PostgreSQL + Flyway
+4. **farm-twin-service** (:8082) manages one Farm Digital Twin per user, land parcels, and crop history — verifies JWTs but never issues them — own PostgreSQL + Flyway
+5. **Docker Compose** brings both services + both databases up with a single `docker compose up --build`
+6. **GitHub Actions CI** builds and tests all 3 components on every push
 
 ## ✅ What Is Built (Module 1)
 
