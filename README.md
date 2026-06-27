@@ -204,6 +204,35 @@ cd frontend && npm test
 | **DevOps** | Docker · Docker Compose · GitHub Actions CI |
 | **Planned** | Apache Kafka · Redis · PyTorch · FastAPI · Flutter · Neo4j · Pinecone |
 
+
+---
+
+## 🎬 Architecture Animation Script
+
+A Python script to generate a **60-second MP4 walkthrough video** of the full Agri-Twin architecture — scene by scene with animated data-flow arrows, colour-coded layers, and explanatory captions.
+
+```bash
+# Install dependencies
+pip install matplotlib numpy pillow
+
+# Run the generator
+python scripts/agri_twin_architecture_animation.py
+
+# Output: agri_twin_architecture.mp4  (~60 sec · 1920×1080 · 30fps)
+```
+
+**Scenes covered:**
+1. 🎬 Title card — tech stack overview
+2. 📐 Full architecture — all 6 components across 4 layers
+3. 🌐 Angular 19 SPA — standalone components, Signals, AuthInterceptor
+4. 🔐 Auth flow — Register → BCrypt → JWT → RefreshToken → logout
+5. 🌿 Farm-Twin Service — Digital Twin lifecycle, Land Parcels, Crop History APIs
+6. 🗄️ PostgreSQL Schema — all 5 tables with columns and constraints
+7. 🐳 Docker Compose + GitHub Actions CI — startup order, health checks, test runs
+8. 🔮 Roadmap — Kafka, Redis, ML, Flutter, Blockchain
+
+> Requires `ffmpeg` for MP4 output. Falls back to animated GIF if FFmpeg is not installed.
+
 ---
 
 ## 👤 Author
@@ -221,6 +250,35 @@ cd frontend && npm test
 [![View Repo](https://img.shields.io/badge/View%20Repo-1565C0?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ravigithubcse/agri-twin)
 
 </div>
+
+
+---
+
+## 🎬 Architecture Animation Script
+
+A Python script to generate a **60-second MP4 walkthrough video** of the full Agri-Twin architecture — scene by scene with animated data-flow arrows, colour-coded layers, and explanatory captions.
+
+```bash
+# Install dependencies
+pip install matplotlib numpy pillow
+
+# Run the generator
+python scripts/agri_twin_architecture_animation.py
+
+# Output: agri_twin_architecture.mp4  (~60 sec · 1920×1080 · 30fps)
+```
+
+**Scenes covered:**
+1. 🎬 Title card — tech stack overview
+2. 📐 Full architecture — all 6 components across 4 layers
+3. 🌐 Angular 19 SPA — standalone components, Signals, AuthInterceptor
+4. 🔐 Auth flow — Register → BCrypt → JWT → RefreshToken → logout
+5. 🌿 Farm-Twin Service — Digital Twin lifecycle, Land Parcels, Crop History APIs
+6. 🗄️ PostgreSQL Schema — all 5 tables with columns and constraints
+7. 🐳 Docker Compose + GitHub Actions CI — startup order, health checks, test runs
+8. 🔮 Roadmap — Kafka, Redis, ML, Flutter, Blockchain
+
+> Requires `ffmpeg` for MP4 output. Falls back to animated GIF if FFmpeg is not installed.
 
 ---
 
