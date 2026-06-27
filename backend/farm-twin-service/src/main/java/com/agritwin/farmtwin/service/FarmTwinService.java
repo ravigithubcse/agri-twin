@@ -54,8 +54,13 @@ public class FarmTwinService {
      * Loads the twin owned by callerUserId. Used internally by
      * LandParcelService/CropHistoryService so every write to a parcel or
      * crop record is provably scoped to the caller's own twin.
+     *
+     * NOT marked readOnly: callers routinely pass the returned entity into
+     * recalculateCompleteness() to persist an updated score in the same
+     * logical operation, so this needs to participate in a writable
+     * transaction context.
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public FarmTwin getOwnedTwinOrThrow(UUID callerUserId) {
         FarmTwin twin = farmTwinRepository.findByUserId(callerUserId)
                 .orElseThrow(() -> new FarmTwinNotFoundException(callerUserId));
