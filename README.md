@@ -235,28 +235,11 @@ python scripts/agri_twin_architecture_animation.py
 
 ---
 
-## 👤 Author
-
-**Ravikumar** · [@ravigithubcse](https://github.com/ravigithubcse) · Bengaluru, India
-
-> Add email / LinkedIn / portfolio links here when ready — left blank since none were on file.
-
----
-
-<div align="center">
-
-*Built by **Ravikumar** — Bengaluru, India 🇮🇳*
-
-[![View Repo](https://img.shields.io/badge/View%20Repo-1565C0?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ravigithubcse/agri-twin)
-
-</div>
-
-
 ---
 
 ## 🎬 Architecture Animation Script
 
-A Python script to generate a **60-second MP4 walkthrough video** of the full Agri-Twin architecture — scene by scene with animated data-flow arrows, colour-coded layers, and explanatory captions.
+A Python script to generate a **60-second MP4 walkthrough video** of the full Agri-Twin architecture — animated data-flow arrows, colour-coded layers, and explanatory captions across 8 scenes.
 
 ```bash
 # Install dependencies
@@ -272,13 +255,13 @@ python scripts/agri_twin_architecture_animation.py
 1. 🎬 Title card — tech stack overview
 2. 📐 Full architecture — all 6 components across 4 layers
 3. 🌐 Angular 19 SPA — standalone components, Signals, AuthInterceptor
-4. 🔐 Auth flow — Register → BCrypt → JWT → RefreshToken → logout
+4. 🔐 Auth flow — Register → BCrypt → JWT access token → Refresh token → Logout
 5. 🌿 Farm-Twin Service — Digital Twin lifecycle, Land Parcels, Crop History APIs
 6. 🗄️ PostgreSQL Schema — all 5 tables with columns and constraints
 7. 🐳 Docker Compose + GitHub Actions CI — startup order, health checks, test runs
-8. 🔮 Roadmap — Kafka, Redis, ML, Flutter, Blockchain
+8. 🔮 Roadmap — Kafka, Redis, ML Prediction, Flutter, Blockchain
 
-> Requires `ffmpeg` for MP4 output. Falls back to animated GIF if FFmpeg is not installed.
+> Requires `ffmpeg` for MP4. Falls back to animated GIF if FFmpeg is not installed.
 
 ---
 
@@ -292,7 +275,7 @@ python scripts/agri_twin_architecture_animation.py
 | **Company** | Ravi Future Labs |
 | **Location** | Bengaluru, India 🇮🇳 |
 | **Email** | [rn5127610@gmail.com](mailto:rn5127610@gmail.com) |
-| **Phone** | [9686906521](tel:+919686906521) |
+| **Phone** | [+91 96869 06521](tel:+919686906521) |
 | **LinkedIn** | [linkedin.com/in/ravikumar2002](https://www.linkedin.com/in/ravikumar2002/) |
 | **GitHub** | [github.com/ravigithubcse](https://github.com/ravigithubcse) |
 
