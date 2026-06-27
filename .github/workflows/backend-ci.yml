@@ -35,6 +35,26 @@ jobs:
         working-directory: backend
         run: mvn -B -pl ${{ matrix.service }} -am verify
 
+      - name: Print failure diagnostics to job summary
+        if: failure()
+        working-directory: backend
+        run: |
+          echo "## Failure diagnostics for ${{ matrix.service }}" >> "$GITHUB_STEP_SUMMARY"
+          echo '### Surefire report summaries (.txt)' >> "$GITHUB_STEP_SUMMARY"
+          for f in ${{ matrix.service }}/target/surefire-reports/*.txt; do
+            if [ -f "$f" ]; then
+              echo "<details><summary>$f</summary>" >> "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+              cat "$f" >> "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+              echo "</details>" >> "$GITHUB_STEP_SUMMARY"
+            fi
+          done
+          echo '### Re-running mvn to capture compiler/build output directly' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          mvn -B -pl ${{ matrix.service }} -am verify >> "$GITHUB_STEP_SUMMARY" 2>&1 || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
