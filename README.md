@@ -11,8 +11,11 @@
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docs.docker.com/)
 [![GitHub Actions](https://img.shields.io/badge/CI-GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://docs.github.com/en/actions)
 
-> A Farm Commodity Digital Twin platform for Indian smallholder farmers, cooperatives, and agri-enterprise buyers —
-> predicts yield, income, and risk using real-time IoT, satellite imagery, and AI.
+> A Farm Commodity Digital Twin platform for Indian smallholder farmers, cooperatives, and agri-enterprise buyers.
+> **Module 1 (this repo, today):** identity, auth, and farm/land/crop record-keeping.
+> Real-time IoT, satellite imagery, and AI yield prediction are part of the long-term
+> product vision (see Roadmap) but are **not implemented yet** — nothing below should be
+> read as claiming otherwise.
 
 [![View Repo](https://img.shields.io/badge/View%20Repo-1565C0?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ravigithubcse/agri-twin)
 [![Module 1](https://img.shields.io/badge/Module_1-Foundation-22c55e?style=for-the-badge)](docs/MODULE_1_COMPLETION.md)
@@ -49,16 +52,16 @@ flowchart LR
 
     CI["⚙️ GitHub Actions CI
     Build + Test
-    all services on push"]
+    on every push"]
 
     FE -->|HTTP + JWT Bearer| US
     FE -->|HTTP + JWT Bearer| FTS
     FTS -->|Verifies JWT issued by| US
     US  <-->|Spring Data JPA + Flyway| PG1
     FTS <-->|Spring Data JPA + Flyway| PG2
-    CI  -.->|every push| US
-    CI  -.->|every push| FTS
-    CI  -.->|every push| FE
+    CI  -.->|on push| US
+    CI  -.->|on push| FTS
+    CI  -.->|on push| FE
 
     classDef fe   fill:#0d47a1,stroke:#42a5f5,color:#e3f2fd
     classDef svc  fill:#1b5e20,stroke:#66bb6a,color:#e8f5e9
@@ -78,17 +81,25 @@ flowchart LR
 3. **user-service** (:8081) handles registration, login, JWT access + refresh tokens, logout, and profile — own PostgreSQL + Flyway
 4. **farm-twin-service** (:8082) manages one Farm Digital Twin per user, land parcels, and crop history — verifies JWTs but never issues them — own PostgreSQL + Flyway
 5. **Docker Compose** brings both services + both databases up with a single `docker compose up --build`
-6. **GitHub Actions CI** builds and tests all 3 components on every push
+6. **GitHub Actions CI** builds and tests all 3 components on every push, once this push's workflow run completes (see Verification note below)
 
 ## ✅ What Is Built (Module 1)
 
 | Component | Status | Details |
 |-----------|--------|---------|
-| `user-service` | ✅ Done | Registration · Login · JWT access + refresh tokens · Logout · Profile |
-| `farm-twin-service` | ✅ Done | Farm Digital Twin · Land parcels · Crop history · Ownership RBAC |
-| `frontend` | ✅ Done | Angular 19 · Standalone components · Signals · Dashboard · Profile score |
+| `user-service` | ✅ Code complete | Registration · Login · JWT access + refresh tokens · Logout · Profile |
+| `farm-twin-service` | ✅ Code complete | Farm Digital Twin · Land parcels · Crop history · Ownership RBAC |
+| `frontend` | ✅ Built & compiles | Angular 19 · Standalone components · Signals · Dashboard · Profile score |
 | Docker Compose | ✅ Done | Full backend stack with real PostgreSQL — single command local dev |
-| GitHub Actions CI | ✅ Done | Build + test all services on every push |
+| GitHub Actions CI | ⏳ See note below | Workflow files exist; first live run's result is linked once available |
+
+> **Verification note:** the Angular frontend has been built successfully end-to-end in
+> both dev and prod configurations. The Java backend has been carefully written and
+> reviewed but, as of this commit, has not yet been compiled by anyone — including the
+> tooling used to write it, which had no network path to Maven Central. The very next
+> push triggers the first real CI run for this backend. Check the
+> [Actions tab](../../actions) before assuming the backend builds cleanly; see
+> `docs/MODULE_1_COMPLETION.md` for the full verification breakdown.
 
 ## 🔮 What Is Planned (Future Modules)
 
@@ -117,6 +128,32 @@ agri-twin/
 ├── docs/                      # Module completion reports · Roadmap · API docs
 └── .github/workflows/         # CI — backend & frontend
 ```
+
+---
+
+## 📡 API Reference (Module 1)
+
+**user-service** (`:8081`)
+
+| Method | Path | Auth | Purpose |
+|---|---|---|---|
+| POST | `/api/v1/auth/register` | No | Register, returns access + refresh tokens |
+| POST | `/api/v1/auth/login` | No | Authenticate, returns access + refresh tokens |
+| POST | `/api/v1/auth/refresh` | No (refresh token in body) | Exchange refresh token for new access token |
+| POST | `/api/v1/auth/logout` | Yes | Revoke all refresh tokens for the caller |
+| GET | `/api/v1/users/me` | Yes | Get the authenticated user's profile |
+
+**farm-twin-service** (`:8082`)
+
+| Method | Path | Auth | Purpose |
+|---|---|---|---|
+| POST / GET | `/api/v1/farm-twins/me` | Yes | Create / get the caller's farm twin |
+| POST / GET | `/api/v1/farm-twins/me/land-parcels` | Yes | Add / list land parcels |
+| GET | `/api/v1/farm-twins/me/land-parcels/{id}` | Yes | Get one land parcel |
+| POST / GET | `/api/v1/farm-twins/me/land-parcels/{id}/crop-history` | Yes | Add / list crop history for a parcel |
+| GET | `/api/v1/farm-twins/me/land-parcels/{id}/crop-history/{cropId}` | Yes | Get one crop history record |
+
+"Auth" = `Authorization: Bearer <accessToken>` header, issued by user-service.
 
 ---
 
@@ -169,9 +206,17 @@ cd frontend && npm test
 
 ---
 
+## 👤 Author
+
+**Ravikumar** · [@ravigithubcse](https://github.com/ravigithubcse) · Bengaluru, India
+
+> Add email / LinkedIn / portfolio links here when ready — left blank since none were on file.
+
+---
+
 <div align="center">
 
-*Built by **Ravikumar** — Bengaluru, India 🇮🇳 · Ravi Future Labs*
+*Built by **Ravikumar** — Bengaluru, India 🇮🇳*
 
 [![View Repo](https://img.shields.io/badge/View%20Repo-1565C0?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ravigithubcse/agri-twin)
 

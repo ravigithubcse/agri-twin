@@ -21,8 +21,7 @@ npm-debug.log*
 # --- IDE ---
 .idea/
 *.iml
-.vscode/
-!frontend/.vscode/extensions.json
+/.vscode/
 .DS_Store
 
 # --- Logs ---
@@ -35,4 +34,3 @@ surefire-reports/
 
 # --- OS ---
 Thumbs.db
-.github/
