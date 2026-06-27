@@ -62,6 +62,11 @@ public class RefreshTokenService {
             throw new InvalidRefreshTokenException("token has expired");
         }
 
+        // Revoke the old token so it can never be replayed.
+        // This implements true rotation: each refresh token is single-use.
+        existing.setRevoked(true);
+        refreshTokenRepository.save(existing);
+
         return existing.getUserId();
     }
 
