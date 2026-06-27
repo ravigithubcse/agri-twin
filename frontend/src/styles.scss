@@ -1,0 +1,26 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+@use './styles/tokens';
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$green-palette,
+      tertiary: mat.$orange-palette,
+    ),
+    typography: Inter,
+    density: 0,
+  ));
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--at-font-base);
+  background: var(--at-surface-100);
+  color: var(--at-ink-900);
+}
+* { box-sizing: border-box; }
+

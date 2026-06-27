@@ -1,0 +1,36 @@
+# --- Java / Maven ---
+target/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/
+
+# --- Node / Angular ---
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+*.tsbuildinfo
+
+# --- Environment / secrets ---
+.env
+.env.local
+*.pem
+*.key
+
+# --- IDE ---
+.idea/
+*.iml
+/.vscode/
+.DS_Store
+
+# --- Logs ---
+*.log
+logs/
+
+# --- Test artifacts ---
+coverage/
+surefire-reports/
+
+# --- OS ---
+Thumbs.db

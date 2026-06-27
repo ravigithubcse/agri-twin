@@ -1,0 +1,53 @@
+@if (isLoading()) {
+  <div class="overview__loading">
+    <mat-spinner diameter="36" />
+  </div>
+} @else if (!hasTwin()) {
+  <mat-card class="overview__empty">
+    <mat-icon class="overview__empty-icon">eco</mat-icon>
+    <h2>Welcome{{ currentUser() ? ', ' + currentUser()!.fullName : '' }}</h2>
+    <p>You don't have a Farm Digital Twin yet. Create one to start tracking your land, crops, and harvest history.</p>
+    <button mat-flat-button color="primary" (click)="createTwin()" [disabled]="isCreatingTwin()">
+      @if (isCreatingTwin()) {
+        <mat-spinner diameter="18" />
+      } @else {
+        <span>Create my Farm Twin</span>
+      }
+    </button>
+  </mat-card>
+} @else {
+  <div class="overview">
+    <h1 class="overview__title">Farm Overview</h1>
+
+    <div class="overview__grid">
+      <mat-card class="overview__stat-card">
+        <span class="overview__stat-label">Land Parcels</span>
+        <span class="overview__stat-value">{{ parcelCount() }}</span>
+      </mat-card>
+
+      <mat-card class="overview__stat-card">
+        <span class="overview__stat-label">Total Area</span>
+        <span class="overview__stat-value">{{ totalAcres() | number: '1.1-2' }} <small>acres</small></span>
+      </mat-card>
+
+      <mat-card class="overview__stat-card overview__stat-card--wide">
+        <span class="overview__stat-label">Profile Completeness</span>
+        <div class="overview__completeness">
+          <mat-progress-bar mode="determinate" [value]="farmTwin()?.profileCompletenessScore ?? 0" />
+          <span class="overview__completeness-value">{{ farmTwin()?.profileCompletenessScore ?? 0 }}%</span>
+        </div>
+      </mat-card>
+    </div>
+
+    <mat-card class="overview__cta">
+      <div>
+        <h3>Manage your land parcels</h3>
+        <p>Add fields, log crops, and record harvest income to build out your farm's digital twin.</p>
+      </div>
+      <button mat-flat-button color="primary" routerLink="/dashboard/land-parcels">
+        View Land Parcels
+        <mat-icon iconPositionEnd>arrow_forward</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+}

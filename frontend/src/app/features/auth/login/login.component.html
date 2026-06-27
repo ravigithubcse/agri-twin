@@ -1,0 +1,46 @@
+<div class="auth-page">
+  <mat-card class="auth-card">
+    <div class="auth-card__brand">
+      <span class="auth-card__mark">AT</span>
+      <h1>AGRI-TWIN AI</h1>
+      <p>Sign in to your farm twin</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Mobile number</mat-label>
+        <input matInput formControlName="phone" maxlength="10" inputmode="numeric" placeholder="9876543210" />
+        @if (form.controls.phone.touched && form.controls.phone.invalid) {
+          <mat-error>Enter a valid 10-digit mobile number</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password" />
+        <button mat-icon-button matSuffix type="button" (click)="hidePassword.set(!hidePassword())">
+          <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (form.controls.password.touched && form.controls.password.invalid) {
+          <mat-error>Password is required</mat-error>
+        }
+      </mat-form-field>
+
+      @if (errorMessage()) {
+        <div class="auth-form__error">{{ errorMessage() }}</div>
+      }
+
+      <button mat-flat-button color="primary" type="submit" class="auth-form__submit" [disabled]="isSubmitting()">
+        @if (isSubmitting()) {
+          <mat-spinner diameter="20" />
+        } @else {
+          <span>Sign in</span>
+        }
+      </button>
+    </form>
+
+    <p class="auth-card__footer">
+      New to AGRI-TWIN? <a routerLink="/register">Create an account</a>
+    </p>
+  </mat-card>
+</div>

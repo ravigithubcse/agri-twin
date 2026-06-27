@@ -1,0 +1,72 @@
+<div class="auth-page">
+  <mat-card class="auth-card">
+    <div class="auth-card__brand">
+      <span class="auth-card__mark">AT</span>
+      <h1>Create your farm twin</h1>
+      <p>Join AGRI-TWIN AI in under a minute</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Full name</mat-label>
+        <input matInput formControlName="fullName" />
+        @if (form.controls.fullName.touched && form.controls.fullName.invalid) {
+          <mat-error>Please enter your full name</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mobile number</mat-label>
+        <input matInput formControlName="phone" maxlength="10" inputmode="numeric" placeholder="9876543210" />
+        @if (form.controls.phone.touched && form.controls.phone.invalid) {
+          <mat-error>Enter a valid 10-digit mobile number</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password" />
+        <button mat-icon-button matSuffix type="button" (click)="hidePassword.set(!hidePassword())">
+          <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (form.controls.password.touched && form.controls.password.invalid) {
+          <mat-error>Password must be at least 8 characters</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Preferred language</mat-label>
+        <mat-select formControlName="languagePreference">
+          @for (option of languageOptions; track option.value) {
+            <mat-option [value]="option.value">{{ option.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      @if (errorMessage()) {
+        <div class="auth-form__error">
+          <p>{{ errorMessage() }}</p>
+          @if (errorDetails().length) {
+            <ul>
+              @for (detail of errorDetails(); track detail) {
+                <li>{{ detail }}</li>
+              }
+            </ul>
+          }
+        </div>
+      }
+
+      <button mat-flat-button color="primary" type="submit" class="auth-form__submit" [disabled]="isSubmitting()">
+        @if (isSubmitting()) {
+          <mat-spinner diameter="20" />
+        } @else {
+          <span>Create account</span>
+        }
+      </button>
+    </form>
+
+    <p class="auth-card__footer">
+      Already have an account? <a routerLink="/login">Sign in</a>
+    </p>
+  </mat-card>
+</div>

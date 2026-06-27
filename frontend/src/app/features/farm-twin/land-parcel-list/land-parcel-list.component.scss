@@ -1,0 +1,95 @@
+.parcel-list__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--at-space-5);
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 var(--at-space-1);
+    color: var(--at-ink-900);
+  }
+
+  p {
+    margin: 0;
+    color: var(--at-ink-400);
+    font-size: 0.9rem;
+  }
+}
+
+.parcel-list__loading {
+  display: flex;
+  justify-content: center;
+  padding: var(--at-space-7) 0;
+}
+
+.parcel-list__empty {
+  text-align: center;
+  padding: var(--at-space-7) var(--at-space-5);
+  color: var(--at-ink-400);
+
+  mat-icon { font-size: 40px; width: 40px; height: 40px; color: var(--at-ink-400); margin-bottom: var(--at-space-2); }
+}
+
+.parcel-list__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--at-space-4);
+}
+
+.parcel-card {
+  padding: var(--at-space-4);
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: var(--at-space-3);
+
+    h3 { margin: 0; font-size: 1.1rem; color: var(--at-ink-900); }
+  }
+
+  &__area {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--at-crop-600);
+    background: var(--at-crop-100);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  &__no-crop {
+    font-size: 0.85rem;
+    color: var(--at-ink-400);
+    margin: 0 0 var(--at-space-3);
+  }
+
+  &__dates {
+    display: flex;
+    align-items: center;
+    gap: var(--at-space-1);
+    font-size: 0.8rem;
+    color: var(--at-ink-700);
+    margin: var(--at-space-3) 0 0;
+
+    mat-icon { font-size: 16px; width: 16px; height: 16px; color: var(--at-ink-400); }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    gap: var(--at-space-1);
+    font-size: 0.8rem;
+    color: var(--at-ink-400);
+    margin-top: var(--at-space-3);
+    padding-top: var(--at-space-3);
+    border-top: 1px solid var(--at-border);
+
+    mat-icon { font-size: 16px; width: 16px; height: 16px; }
+  }
+}
+
+mat-chip-set {
+  margin-bottom: var(--at-space-2);
+}
