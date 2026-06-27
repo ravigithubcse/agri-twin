@@ -1,0 +1,101 @@
+.shell {
+  height: 100vh;
+
+  &__sidenav {
+    width: 240px;
+    background: var(--at-soil-900);
+    color: var(--at-surface-0);
+    display: flex;
+    flex-direction: column;
+    border: none;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--at-space-3);
+    padding: var(--at-space-5) var(--at-space-4);
+  }
+
+  &__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--at-radius-sm);
+    background: var(--at-crop-500);
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  &__brand-name {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 0.95rem;
+  }
+
+  &__nav {
+    flex: 1;
+    padding-top: var(--at-space-3);
+
+    a {
+      color: rgba(255, 255, 255, 0.75);
+
+      mat-icon { color: rgba(255, 255, 255, 0.6); }
+
+      &.active {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        mat-icon { color: var(--at-crop-500); }
+      }
+    }
+  }
+
+  &__footer {
+    padding: var(--at-space-4);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__logout {
+    width: 100%;
+    color: rgba(255, 255, 255, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+  }
+
+  &__toolbar {
+    background: var(--at-surface-0);
+    border-bottom: 1px solid var(--at-border);
+  }
+
+  &__toolbar-spacer {
+    flex: 1;
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.2;
+  }
+
+  &__user-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--at-ink-900);
+  }
+
+  &__user-tier {
+    font-size: 0.75rem;
+    color: var(--at-ink-400);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  &__main {
+    padding: var(--at-space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}

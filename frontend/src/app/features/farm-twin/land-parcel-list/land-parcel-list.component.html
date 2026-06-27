@@ -1,0 +1,60 @@
+<div class="parcel-list">
+  <div class="parcel-list__header">
+    <div>
+      <h1>Land Parcels</h1>
+      <p>{{ parcels().length }} parcel{{ parcels().length === 1 ? '' : 's' }} &middot; {{ totalAcres() | number: '1.1-2' }} acres total</p>
+    </div>
+    <button mat-flat-button color="primary" (click)="openAddParcelDialog()">
+      <mat-icon>add</mat-icon>
+      Add Land Parcel
+    </button>
+  </div>
+
+  @if (isLoading()) {
+    <div class="parcel-list__loading">
+      <mat-spinner diameter="36" />
+    </div>
+  } @else if (parcels().length === 0) {
+    <mat-card class="parcel-list__empty">
+      <mat-icon>map</mat-icon>
+      <p>No land parcels yet. Add your first field to get started.</p>
+    </mat-card>
+  } @else {
+    <div class="parcel-list__grid">
+      @for (parcel of parcels(); track parcel.id) {
+        <mat-card class="parcel-card">
+          <div class="parcel-card__header">
+            <h3>{{ parcel.label }}</h3>
+            <span class="parcel-card__area">{{ parcel.areaAcres }} acres</span>
+          </div>
+
+          @if (parcel.currentCrop) {
+            <mat-chip-set>
+              <mat-chip>{{ parcel.currentCrop }}</mat-chip>
+              @if (parcel.soilType) {
+                <mat-chip>{{ parcel.soilType }}</mat-chip>
+              }
+            </mat-chip-set>
+          } @else {
+            <p class="parcel-card__no-crop">No crop currently sown</p>
+          }
+
+          @if (parcel.sowingDate) {
+            <div class="parcel-card__dates">
+              <mat-icon>event</mat-icon>
+              <span>Sown {{ parcel.sowingDate | date: 'MMM d, y' }}</span>
+              @if (parcel.expectedHarvestDate) {
+                <span> &rarr; Harvest {{ parcel.expectedHarvestDate | date: 'MMM d, y' }}</span>
+              }
+            </div>
+          }
+
+          <div class="parcel-card__footer">
+            <mat-icon>history</mat-icon>
+            <span>{{ parcel.cropHistory.length }} crop history record{{ parcel.cropHistory.length === 1 ? '' : 's' }}</span>
+          </div>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,104 @@
+name: agri-twin
+
+services:
+  postgres-users:
+    image: postgres:16-alpine
+    container_name: agritwin-postgres-users
+    environment:
+      POSTGRES_DB: agritwin_users
+      POSTGRES_USER: agritwin
+      POSTGRES_PASSWORD: agritwin_dev_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_users_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agritwin -d agritwin_users"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - agritwin-net
+
+  postgres-farmtwin:
+    image: postgres:16-alpine
+    container_name: agritwin-postgres-farmtwin
+    environment:
+      POSTGRES_DB: agritwin_farmtwin
+      POSTGRES_USER: agritwin
+      POSTGRES_PASSWORD: agritwin_dev_password
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_farmtwin_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agritwin -d agritwin_farmtwin"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - agritwin-net
+
+  user-service:
+    build:
+      context: ./backend
+      dockerfile: user-service/Dockerfile
+    container_name: agritwin-user-service
+    environment:
+      DB_URL: jdbc:postgresql://postgres-users:5432/agritwin_users
+      DB_USERNAME: agritwin
+      DB_PASSWORD: agritwin_dev_password
+      JWT_SECRET: ${JWT_SECRET:-dev-only-secret-key-change-in-production-min-256-bits-long-xxxxxxxxxxxxxxxxxxxxxxxxxx}
+      SERVER_PORT: 8081
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres-users:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8081/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+    networks:
+      - agritwin-net
+
+  farm-twin-service:
+    build:
+      context: ./backend
+      dockerfile: farm-twin-service/Dockerfile
+    container_name: agritwin-farm-twin-service
+    environment:
+      DB_URL: jdbc:postgresql://postgres-farmtwin:5432/agritwin_farmtwin
+      DB_USERNAME: agritwin
+      DB_PASSWORD: agritwin_dev_password
+      # Must match user-service's JWT_SECRET exactly -- see SecurityConfig
+      # comments in both services for why this shared-secret model is a
+      # known, temporary simplification.
+      JWT_SECRET: ${JWT_SECRET:-dev-only-secret-key-change-in-production-min-256-bits-long-xxxxxxxxxxxxxxxxxxxxxxxxxx}
+      USER_SERVICE_URL: http://user-service:8081
+      SERVER_PORT: 8082
+    ports:
+      - "8082:8082"
+    depends_on:
+      postgres-farmtwin:
+        condition: service_healthy
+      user-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8082/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+    networks:
+      - agritwin-net
+
+volumes:
+  postgres_users_data:
+  postgres_farmtwin_data:
+
+networks:
+  agritwin-net:
+    driver: bridge

@@ -1,0 +1,22 @@
+.parcel-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--at-space-1);
+  min-width: 380px;
+
+  mat-form-field { width: 100%; }
+}
+
+.parcel-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--at-space-3);
+}
+
+.parcel-form__error {
+  background: rgba(179, 67, 47, 0.08);
+  color: var(--at-danger);
+  border-radius: var(--at-radius-sm);
+  padding: var(--at-space-3);
+  font-size: 0.85rem;
+}
