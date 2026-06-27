@@ -50,15 +50,15 @@ The plugin org.apache.maven.plugins:maven-compiler-plugin:4.0.0-beta-1 has unmet
 [INFO]  T E S T S
 [INFO] -------------------------------------------------------
 [INFO] Running FarmTwinService
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
 WARNING: A Java agent has been loaded dynamically (/home/runner/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.19/byte-buddy-agent-1.14.19.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
 WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
-OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
-[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.593 s -- in FarmTwinService
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.692 s -- in FarmTwinService
 [INFO] Running Farm twin flow (full integration)
-12:34:33.852 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest]: FarmTwinFlowIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-12:34:33.992 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.agritwin.farmtwin.FarmTwinServiceApplication for test class com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest
+12:40:15.750 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest]: FarmTwinFlowIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+12:40:15.896 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.agritwin.farmtwin.FarmTwinServiceApplication for test class com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -69,37 +69,38 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 
  :: Spring Boot ::                (v3.3.4)
 
-2026-06-27T12:34:34.556Z  INFO 2274 --- [farm-twin-service] [           main] c.a.f.i.FarmTwinFlowIntegrationTest      : Starting FarmTwinFlowIntegrationTest using Java 21.0.11 with PID 2274 (started by runner in /home/runner/work/agri-twin/agri-twin/backend/farm-twin-service)
-2026-06-27T12:34:34.559Z  INFO 2274 --- [farm-twin-service] [           main] c.a.f.i.FarmTwinFlowIntegrationTest      : The following 1 profile is active: "test"
-2026-06-27T12:34:36.342Z  INFO 2274 --- [farm-twin-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-06-27T12:34:36.493Z  INFO 2274 --- [farm-twin-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 143 ms. Found 3 JPA repository interfaces.
-2026-06-27T12:34:37.389Z  INFO 2274 --- [farm-twin-service] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-06-27T12:34:37.445Z  INFO 2274 --- [farm-twin-service] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-06-27T12:34:37.477Z  INFO 2274 --- [farm-twin-service] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-06-27T12:34:37.587Z  INFO 2274 --- [farm-twin-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-06-27T12:34:37.615Z  INFO 2274 --- [farm-twin-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-06-27T12:34:37.835Z  INFO 2274 --- [farm-twin-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:agritwin_farmtwin_test user=SA
-2026-06-27T12:34:37.837Z  INFO 2274 --- [farm-twin-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-06-27T12:34:37.862Z  WARN 2274 --- [farm-twin-service] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-06-27T12:34:38.869Z  INFO 2274 --- [farm-twin-service] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-06-27T12:34:38.913Z  INFO 2274 --- [farm-twin-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-06-27T12:34:39.802Z  WARN 2274 --- [farm-twin-service] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+2026-06-27T12:40:16.595Z  INFO 2326 --- [farm-twin-service] [           main] c.a.f.i.FarmTwinFlowIntegrationTest      : Starting FarmTwinFlowIntegrationTest using Java 21.0.11 with PID 2326 (started by runner in /home/runner/work/agri-twin/agri-twin/backend/farm-twin-service)
+2026-06-27T12:40:16.607Z  INFO 2326 --- [farm-twin-service] [           main] c.a.f.i.FarmTwinFlowIntegrationTest      : The following 1 profile is active: "test"
+2026-06-27T12:40:18.423Z  INFO 2326 --- [farm-twin-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-27T12:40:18.590Z  INFO 2326 --- [farm-twin-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 159 ms. Found 3 JPA repository interfaces.
+2026-06-27T12:40:19.463Z  INFO 2326 --- [farm-twin-service] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-27T12:40:19.523Z  INFO 2326 --- [farm-twin-service] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-06-27T12:40:19.556Z  INFO 2326 --- [farm-twin-service] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-06-27T12:40:19.682Z  INFO 2326 --- [farm-twin-service] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-27T12:40:19.719Z  INFO 2326 --- [farm-twin-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-27T12:40:19.902Z  INFO 2326 --- [farm-twin-service] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:agritwin_farmtwin_test user=SA
+2026-06-27T12:40:19.907Z  INFO 2326 --- [farm-twin-service] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-27T12:40:19.935Z  WARN 2326 --- [farm-twin-service] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-06-27T12:40:20.875Z  INFO 2326 --- [farm-twin-service] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-27T12:40:20.932Z  INFO 2326 --- [farm-twin-service] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-27T12:40:21.904Z  WARN 2326 --- [farm-twin-service] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: 89f26cdd-8f04-439e-a774-dd3a72c9a525
+Using generated security password: a72ef126-58ad-4583-9944-4d80cfa6e0b7
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2026-06-27T12:34:40.575Z  INFO 2274 --- [farm-twin-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
-2026-06-27T12:34:41.648Z  INFO 2274 --- [farm-twin-service] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-06-27T12:34:41.649Z  INFO 2274 --- [farm-twin-service] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-06-27T12:34:41.651Z  INFO 2274 --- [farm-twin-service] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
-2026-06-27T12:34:41.862Z  INFO 2274 --- [farm-twin-service] [           main] c.a.f.i.FarmTwinFlowIntegrationTest      : Started FarmTwinFlowIntegrationTest in 7.7 seconds (process running for 10.57)
+2026-06-27T12:40:22.612Z  INFO 2326 --- [farm-twin-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-06-27T12:40:23.630Z  INFO 2326 --- [farm-twin-service] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-06-27T12:40:23.631Z  INFO 2326 --- [farm-twin-service] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-06-27T12:40:23.633Z  INFO 2326 --- [farm-twin-service] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-06-27T12:40:23.829Z  INFO 2326 --- [farm-twin-service] [           main] c.a.f.i.FarmTwinFlowIntegrationTest      : Started FarmTwinFlowIntegrationTest in 7.747 seconds (process running for 10.729)
+2026-06-27T12:40:24.733Z  WARN 2326 --- [farm-twin-service] [           main] c.a.f.exception.GlobalExceptionHandler   : Bad request on POST /api/v1/farm-twins/me/land-parcels/0cbe6e0b-8edf-42d9-997e-e2436f610473/crop-history: Name for argument of type [java.util.UUID] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.
 
 MockHttpServletRequest:
       HTTP Method = GET
       Request URI = /api/v1/farm-twins/me
        Parameters = {}
-          Headers = [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjOTQwNWEzNS1kM2I5LTQ3MzItYmIwNS0yMDhkNjA2MjBiNDEiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2MzY4MiwiZXhwIjoxNzgyNTY0NTgyfQ.jCPxksI_yqI7BRm51vsXftLguXT_7xgwNJpZHTU-NxCNkUru5gsk46SKJ_UOPqJ0XztIMYHdH4hJNzgtxTu1wA"]
+          Headers = [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0YmU4OTVjZi00ZjRiLTRmZDUtYmI5MC00MTc0YTBkNzNhNDQiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2NDAyNCwiZXhwIjoxNzgyNTY0OTI0fQ.MrHgGgSKF-MpRiRXZ1_zSg2JTMbkQOg3qEaLmwNgFG_l4aWfhn9rA96vQgxdGHGwL0flhip62ib6XLDIHkXcWA"]
              Body = null
     Session Attrs = {}
 
@@ -127,7 +128,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2026-06-27T12:34:42.783520310Z","status":404,"error":"NOT_FOUND","message":"No farm twin exists for user: c9405a35-d3b9-4732-bb05-208d60620b41","path":"/api/v1/farm-twins/me","details":[]}
+             Body = {"timestamp":"2026-06-27T12:40:24.606953149Z","status":404,"error":"NOT_FOUND","message":"No farm twin exists for user: 4be895cf-4f4b-4fd5-bb90-4174a0d73a44","path":"/api/v1/farm-twins/me","details":[]}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -136,7 +137,7 @@ MockHttpServletRequest:
       HTTP Method = POST
       Request URI = /api/v1/farm-twins/me
        Parameters = {}
-          Headers = [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjOTQwNWEzNS1kM2I5LTQ3MzItYmIwNS0yMDhkNjA2MjBiNDEiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2MzY4MiwiZXhwIjoxNzgyNTY0NTgyfQ.jCPxksI_yqI7BRm51vsXftLguXT_7xgwNJpZHTU-NxCNkUru5gsk46SKJ_UOPqJ0XztIMYHdH4hJNzgtxTu1wA"]
+          Headers = [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0YmU4OTVjZi00ZjRiLTRmZDUtYmI5MC00MTc0YTBkNzNhNDQiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2NDAyNCwiZXhwIjoxNzgyNTY0OTI0fQ.MrHgGgSKF-MpRiRXZ1_zSg2JTMbkQOg3qEaLmwNgFG_l4aWfhn9rA96vQgxdGHGwL0flhip62ib6XLDIHkXcWA"]
              Body = null
     Session Attrs = {}
 
@@ -164,7 +165,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"id":"27097a1e-ac4b-4f6e-b42a-95b8dfc645ee","userId":"c9405a35-d3b9-4732-bb05-208d60620b41","version":1,"profileCompletenessScore":0,"landParcels":[],"createdAt":null,"lastUpdated":null}
+             Body = {"id":"1795e7c0-e947-4986-af03-5b9dd91d42b6","userId":"4be895cf-4f4b-4fd5-bb90-4174a0d73a44","version":1,"profileCompletenessScore":0,"landParcels":[],"createdAt":null,"lastUpdated":null}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -173,7 +174,7 @@ MockHttpServletRequest:
       HTTP Method = POST
       Request URI = /api/v1/farm-twins/me
        Parameters = {}
-          Headers = [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjOTQwNWEzNS1kM2I5LTQ3MzItYmIwNS0yMDhkNjA2MjBiNDEiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2MzY4MiwiZXhwIjoxNzgyNTY0NTgyfQ.jCPxksI_yqI7BRm51vsXftLguXT_7xgwNJpZHTU-NxCNkUru5gsk46SKJ_UOPqJ0XztIMYHdH4hJNzgtxTu1wA"]
+          Headers = [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0YmU4OTVjZi00ZjRiLTRmZDUtYmI5MC00MTc0YTBkNzNhNDQiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2NDAyNCwiZXhwIjoxNzgyNTY0OTI0fQ.MrHgGgSKF-MpRiRXZ1_zSg2JTMbkQOg3qEaLmwNgFG_l4aWfhn9rA96vQgxdGHGwL0flhip62ib6XLDIHkXcWA"]
              Body = null
     Session Attrs = {}
 
@@ -201,7 +202,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2026-06-27T12:34:42.807241821Z","status":409,"error":"CONFLICT","message":"A farm twin already exists for user: c9405a35-d3b9-4732-bb05-208d60620b41","path":"/api/v1/farm-twins/me","details":[]}
+             Body = {"timestamp":"2026-06-27T12:40:24.645286352Z","status":409,"error":"CONFLICT","message":"A farm twin already exists for user: 4be895cf-4f4b-4fd5-bb90-4174a0d73a44","path":"/api/v1/farm-twins/me","details":[]}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -210,7 +211,7 @@ MockHttpServletRequest:
       HTTP Method = POST
       Request URI = /api/v1/farm-twins/me/land-parcels
        Parameters = {}
-          Headers = [Content-Type:"application/json;charset=UTF-8", Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjOTQwNWEzNS1kM2I5LTQ3MzItYmIwNS0yMDhkNjA2MjBiNDEiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2MzY4MiwiZXhwIjoxNzgyNTY0NTgyfQ.jCPxksI_yqI7BRm51vsXftLguXT_7xgwNJpZHTU-NxCNkUru5gsk46SKJ_UOPqJ0XztIMYHdH4hJNzgtxTu1wA", Content-Length:"221"]
+          Headers = [Content-Type:"application/json;charset=UTF-8", Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0YmU4OTVjZi00ZjRiLTRmZDUtYmI5MC00MTc0YTBkNzNhNDQiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2NDAyNCwiZXhwIjoxNzgyNTY0OTI0fQ.MrHgGgSKF-MpRiRXZ1_zSg2JTMbkQOg3qEaLmwNgFG_l4aWfhn9rA96vQgxdGHGwL0flhip62ib6XLDIHkXcWA", Content-Length:"221"]
              Body = {"label":"North Field","latitude":18.520430,"longitude":73.856743,"soilType":"Black Cotton Soil","irrigationType":"Drip","areaAcres":1.250,"currentCrop":"Rice","sowingDate":"2026-06-01","expectedHarvestDate":"2026-10-15"}
     Session Attrs = {}
 
@@ -238,7 +239,7 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"id":"6cc412e4-3f6f-4115-b305-09551aa19656","label":"North Field","latitude":18.520430,"longitude":73.856743,"soilType":"Black Cotton Soil","irrigationType":"Drip","areaAcres":1.250,"currentCrop":"Rice","sowingDate":"2026-06-01","expectedHarvestDate":"2026-10-15","cropHistory":[],"createdAt":null,"updatedAt":null}
+             Body = {"id":"0cbe6e0b-8edf-42d9-997e-e2436f610473","label":"North Field","latitude":18.520430,"longitude":73.856743,"soilType":"Black Cotton Soil","irrigationType":"Drip","areaAcres":1.250,"currentCrop":"Rice","sowingDate":"2026-06-01","expectedHarvestDate":"2026-10-15","cropHistory":[],"createdAt":null,"updatedAt":null}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
@@ -247,7 +248,7 @@ MockHttpServletRequest:
       HTTP Method = GET
       Request URI = /api/v1/farm-twins/me
        Parameters = {}
-          Headers = [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjOTQwNWEzNS1kM2I5LTQ3MzItYmIwNS0yMDhkNjA2MjBiNDEiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2MzY4MiwiZXhwIjoxNzgyNTY0NTgyfQ.jCPxksI_yqI7BRm51vsXftLguXT_7xgwNJpZHTU-NxCNkUru5gsk46SKJ_UOPqJ0XztIMYHdH4hJNzgtxTu1wA"]
+          Headers = [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0YmU4OTVjZi00ZjRiLTRmZDUtYmI5MC00MTc0YTBkNzNhNDQiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2NDAyNCwiZXhwIjoxNzgyNTY0OTI0fQ.MrHgGgSKF-MpRiRXZ1_zSg2JTMbkQOg3qEaLmwNgFG_l4aWfhn9rA96vQgxdGHGwL0flhip62ib6XLDIHkXcWA"]
              Body = null
     Session Attrs = {}
 
@@ -275,16 +276,16 @@ MockHttpServletResponse:
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"id":"27097a1e-ac4b-4f6e-b42a-95b8dfc645ee","userId":"c9405a35-d3b9-4732-bb05-208d60620b41","version":1,"profileCompletenessScore":70,"landParcels":[{"id":"6cc412e4-3f6f-4115-b305-09551aa19656","label":"North Field","latitude":18.520430,"longitude":73.856743,"soilType":"Black Cotton Soil","irrigationType":"Drip","areaAcres":1.250,"currentCrop":"Rice","sowingDate":"2026-06-01","expectedHarvestDate":"2026-10-15","cropHistory":[],"createdAt":"2026-06-27T12:34:42.837619Z","updatedAt":"2026-06-27T12:34:42.837640Z"}],"createdAt":"2026-06-27T12:34:42.792450Z","lastUpdated":"2026-06-27T12:34:42.840300Z"}
+             Body = {"id":"1795e7c0-e947-4986-af03-5b9dd91d42b6","userId":"4be895cf-4f4b-4fd5-bb90-4174a0d73a44","version":1,"profileCompletenessScore":70,"landParcels":[{"id":"0cbe6e0b-8edf-42d9-997e-e2436f610473","label":"North Field","latitude":18.520430,"longitude":73.856743,"soilType":"Black Cotton Soil","irrigationType":"Drip","areaAcres":1.250,"currentCrop":"Rice","sowingDate":"2026-06-01","expectedHarvestDate":"2026-10-15","cropHistory":[],"createdAt":"2026-06-27T12:40:24.678989Z","updatedAt":"2026-06-27T12:40:24.679005Z"}],"createdAt":"2026-06-27T12:40:24.623488Z","lastUpdated":"2026-06-27T12:40:24.681637Z"}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
 
 MockHttpServletRequest:
       HTTP Method = POST
-      Request URI = /api/v1/farm-twins/me/land-parcels/6cc412e4-3f6f-4115-b305-09551aa19656/crop-history
+      Request URI = /api/v1/farm-twins/me/land-parcels/0cbe6e0b-8edf-42d9-997e-e2436f610473/crop-history
        Parameters = {}
-          Headers = [Content-Type:"application/json;charset=UTF-8", Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjOTQwNWEzNS1kM2I5LTQ3MzItYmIwNS0yMDhkNjA2MjBiNDEiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2MzY4MiwiZXhwIjoxNzgyNTY0NTgyfQ.jCPxksI_yqI7BRm51vsXftLguXT_7xgwNJpZHTU-NxCNkUru5gsk46SKJ_UOPqJ0XztIMYHdH4hJNzgtxTu1wA", Content-Length:"153"]
+          Headers = [Content-Type:"application/json;charset=UTF-8", Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0YmU4OTVjZi00ZjRiLTRmZDUtYmI5MC00MTc0YTBkNzNhNDQiLCJpc3MiOiJhZ3JpdHdpbi1haS10ZXN0IiwicGhvbmUiOiI5MTIzNDU2NzgwIiwicm9sZSI6IkZBUk1FUiIsImlhdCI6MTc4MjU2NDAyNCwiZXhwIjoxNzgyNTY0OTI0fQ.MrHgGgSKF-MpRiRXZ1_zSg2JTMbkQOg3qEaLmwNgFG_l4aWfhn9rA96vQgxdGHGwL0flhip62ib6XLDIHkXcWA", Content-Length:"153"]
              Body = {"cropName":"Rice","season":"KHARIF","yieldQuintals":18.50,"incomeInr":42000.00,"inputCostInr":12000.00,"marketName":"Pune APMC","saleDate":"2026-10-20"}
     Session Attrs = {}
 
@@ -308,17 +309,17 @@ FlashMap:
        Attributes = null
 
 MockHttpServletResponse:
-           Status = 500
+           Status = 400
     Error message = null
           Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Content-Type:"application/json", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
      Content type = application/json
-             Body = {"timestamp":"2026-06-27T12:34:42.877882475Z","status":500,"error":"INTERNAL_ERROR","message":"An unexpected error occurred","path":"/api/v1/farm-twins/me/land-parcels/6cc412e4-3f6f-4115-b305-09551aa19656/crop-history","details":[]}
+             Body = {"timestamp":"2026-06-27T12:40:24.735091775Z","status":400,"error":"BAD_REQUEST","message":"Name for argument of type [java.util.UUID] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag.","path":"/api/v1/farm-twins/me/land-parcels/0cbe6e0b-8edf-42d9-997e-e2436f610473/crop-history","details":[]}
     Forwarded URL = null
    Redirected URL = null
           Cookies = []
-[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 9.328 s <<< FAILURE! -- in Farm twin flow (full integration)
-[ERROR] com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest.fullFarmTwinLifecycle_works -- Time elapsed: 0.134 s <<< FAILURE!
-java.lang.AssertionError: Status expected:<201> but was:<500>
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 9.286 s <<< FAILURE! -- in Farm twin flow (full integration)
+[ERROR] com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest.fullFarmTwinLifecycle_works -- Time elapsed: 0.183 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<201> but was:<400>
 	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
 	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
 	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
@@ -332,20 +333,20 @@ java.lang.AssertionError: Status expected:<201> but was:<500>
 [INFO] Results:
 [INFO] 
 [ERROR] Failures: 
-[ERROR]   FarmTwinFlowIntegrationTest.fullFarmTwinLifecycle_works:120 Status expected:<201> but was:<500>
+[ERROR]   FarmTwinFlowIntegrationTest.fullFarmTwinLifecycle_works:120 Status expected:<201> but was:<400>
 [INFO] 
 [ERROR] Tests run: 8, Failures: 1, Errors: 0, Skipped: 0
 [INFO] 
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for AGRI-TWIN AI Backend 1.0.0:
 [INFO] 
-[INFO] AGRI-TWIN AI Backend ............................... SUCCESS [  0.175 s]
-[INFO] farm-twin-service .................................. FAILURE [ 13.354 s]
+[INFO] AGRI-TWIN AI Backend ............................... SUCCESS [  0.183 s]
+[INFO] farm-twin-service .................................. FAILURE [ 13.548 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  13.934 s
-[INFO] Finished at: 2026-06-27T12:34:43Z
+[INFO] Total time:  14.145 s
+[INFO] Finished at: 2026-06-27T12:40:24Z
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.4:test (default-test) on project farm-twin-service: There are test failures.
 [ERROR] 
@@ -367,9 +368,9 @@ java.lang.AssertionError: Status expected:<201> but was:<500>
 -------------------------------------------------------------------------------
 Test set: com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 9.328 s <<< FAILURE! -- in com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest
-com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest.fullFarmTwinLifecycle_works -- Time elapsed: 0.134 s <<< FAILURE!
-java.lang.AssertionError: Status expected:<201> but was:<500>
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 9.286 s <<< FAILURE! -- in com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest
+com.agritwin.farmtwin.integration.FarmTwinFlowIntegrationTest.fullFarmTwinLifecycle_works -- Time elapsed: 0.183 s <<< FAILURE!
+java.lang.AssertionError: Status expected:<201> but was:<400>
 	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
 	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
 	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
@@ -383,4 +384,4 @@ java.lang.AssertionError: Status expected:<201> but was:<500>
 -------------------------------------------------------------------------------
 Test set: com.agritwin.farmtwin.service.FarmTwinServiceTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.593 s -- in com.agritwin.farmtwin.service.FarmTwinServiceTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.692 s -- in com.agritwin.farmtwin.service.FarmTwinServiceTest
