@@ -8,6 +8,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -22,7 +23,7 @@ public class JwtTokenValidator {
     private final SecretKey signingKey;
 
     public JwtTokenValidator(JwtProperties properties) {
-        this.signingKey = Keys.hmacShaKeyFor(properties.secret().getBytes());
+        this.signingKey = Keys.hmacShaKeyFor(properties.secret().getBytes(StandardCharsets.UTF_8));
     }
 
     public Claims validateAndParse(String token) throws JwtException {
